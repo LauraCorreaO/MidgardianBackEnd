@@ -5,11 +5,19 @@ export class UsuarioRequestDto {
 
     @IsString()
     @IsNotEmpty()
+    correo: string;
+
+    @IsString()
+    @IsNotEmpty()
     nombre: string;
 
     @IsString()
     @IsNotEmpty()
-    correo: string;
+    apellido: string;
+
+    @IsString()
+    @IsNotEmpty()
+    nombreUsuario: string;
 
     @IsString()
     @IsNotEmpty()
@@ -19,7 +27,9 @@ export class UsuarioRequestDto {
 export class UsuarioResponseDto {
 
     id: string;
-    nombre: string;
     correo: string;
+    nombre: string;
+    apellido: string
+    nombreUsuario: string;
 
 }
