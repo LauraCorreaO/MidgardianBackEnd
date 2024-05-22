@@ -33,3 +33,15 @@ export class UsuarioResponseDto {
     nombreUsuario: string;
 
 }
+
+export class LoginRequestDto {
+    @IsString()
+    @IsNotEmpty()
+    nombreUsuario: string;
+  
+    @IsString()
+    @IsNotEmpty()
+    contrasena: string;
+  }
+
+

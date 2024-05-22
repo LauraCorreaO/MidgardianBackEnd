@@ -16,9 +16,8 @@ export class UsuarioRepository extends TypeORMGenericRepository<Usuario> impleme
     async usuarioPorEmail(email: string): Promise<Usuario | null> {
         return await this.usuarioRepository.findOne({ where: { correo: email } });
     }
-
+    
     async usuarioPorNombre(username: string): Promise<Usuario | null> {
         return await this.usuarioRepository.findOne({ where: { nombreUsuario: username } });
     }
-   
 }

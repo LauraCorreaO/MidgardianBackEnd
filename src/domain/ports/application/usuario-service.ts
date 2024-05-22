@@ -1,4 +1,4 @@
-import {UsuarioRequestDto, UsuarioResponseDto} from "src/domain/DTOs/usuario-service.dto"
+import {LoginRequestDto, UsuarioRequestDto, UsuarioResponseDto} from "src/domain/DTOs/usuario-service.dto"
 import {Usuario} from "src/domain/entities/"
 
 export abstract class ObtenerUsuarioInterface {
@@ -14,6 +14,10 @@ export abstract class CrearUsuarioInterface {
 }
 
 export abstract class ValidarDuplicadoInterface {
-    abstract existeUsuarioPorEmail(email: string): Promise<boolean>;
-    abstract existeUsuarioPorNombre(username: string): Promise<boolean>;
+    abstract existeUsuarioPorEmail(email: string): Promise<Usuario | null>;
+    abstract existeUsuarioPorNombre(username: string): Promise<Usuario | null>;
+}
+
+export abstract class LoginInterface {
+    abstract execute(loginRequestDto:LoginRequestDto):Promise<LoginRequestDto>
 }
