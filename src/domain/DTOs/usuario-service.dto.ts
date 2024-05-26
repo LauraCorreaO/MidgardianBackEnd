@@ -38,10 +38,16 @@ export class LoginRequestDto {
     @IsString()
     @IsNotEmpty()
     nombreUsuario: string;
-  
+
     @IsString()
     @IsNotEmpty()
-    contrasena: string;
-  }
+    contraseña: string;
+}
 
-
+export class LoginResponseDto {
+    id: string;
+    nombre: string;
+    apellido: string;
+    correo: string;
+    nombreUsuario: string;
+}

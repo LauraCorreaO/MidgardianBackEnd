@@ -1,14 +1,15 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 
-import {UsuarioRequestDto, UsuarioResponseDto, ResponseDto } from "src/domain/DTOs";
-import {ObtenerUsuarioInterface, CrearUsuarioInterface, ObtenerTodosUsuariosInterface} from "src/domain/ports/application";
+import {UsuarioRequestDto, UsuarioResponseDto, ResponseDto, LoginRequestDto, LoginResponseDto } from "src/domain/DTOs";
+import {ObtenerUsuarioInterface, CrearUsuarioInterface, ObtenerTodosUsuariosInterface, LoginUsuarioInterface} from "src/domain/ports/application";
 
 @Controller('usuario')
 export class UsuarioController{
     constructor(
         private readonly crearUsuarioService: CrearUsuarioInterface,
         private readonly obtenerUsuarioService: ObtenerUsuarioInterface,
-        private readonly obtenerTodosUsuariosService: ObtenerTodosUsuariosInterface
+        private readonly obtenerTodosUsuariosService: ObtenerTodosUsuariosInterface,
+        private readonly loginUsuarioService: LoginUsuarioInterface
      ) { }
 
      @Post('/crear')
@@ -42,6 +43,17 @@ export class UsuarioController{
            data: result
         }
         return response;
+     }
+
+     @Post('/login')
+     async loginUsuario(@Body() loginRequestDto: LoginRequestDto): Promise<ResponseDto<LoginResponseDto>> {
+         const result = await this.loginUsuarioService.execute(loginRequestDto);
+         let response: ResponseDto<LoginResponseDto> = {
+             statusCode: 200,
+             message: 'Inicio de sesión exitoso',
+             data: result,
+         };
+         return response;
      }
     
 }

@@ -1,9 +1,8 @@
 //Inyeccion de dependencias de todo lo que se va a usar luego en los servicios que hay en la application
 import { Module } from '@nestjs/common';
 import { InfrastructureModule } from 'src/infraestructure/infrastructure.module';
-import { ObtenerUsuarioAdapter, CrearUsuarioAdapter, ObtenerTodosUsuariosAdapter } from './adapters/usuarios';
-import { ObtenerUsuarioInterface, CrearUsuarioInterface, ObtenerTodosUsuariosInterface, ValidarDuplicadoInterface } from 'src/domain/ports/application';
-import { ValidarDuplicadosService } from './adapters/usuarios/verificar-duplicados.service';
+import { ObtenerUsuarioAdapter, CrearUsuarioAdapter, ObtenerTodosUsuariosAdapter, LoginUsuarioAdapter } from './adapters/usuarios';
+import { ObtenerUsuarioInterface, CrearUsuarioInterface, ObtenerTodosUsuariosInterface, LoginUsuarioInterface } from 'src/domain/ports/application';
 
 const ObtenerUsuarioService = {
   provide:  ObtenerUsuarioInterface,
@@ -20,10 +19,11 @@ const ObtenerTodosUsuariosService = {
   useClass: ObtenerTodosUsuariosAdapter
 }
 
-const ValidarDuplicadoService = {
-  provide: ValidarDuplicadoInterface,
-  useClass: ValidarDuplicadosService
+const LoginUsuarioService = {
+  provide: LoginUsuarioInterface,
+  useClass: LoginUsuarioAdapter
 }
+
 
 @Module({
     imports: [
@@ -33,13 +33,13 @@ const ValidarDuplicadoService = {
         ObtenerUsuarioService,
         CrearUsuariosService,
         ObtenerTodosUsuariosService,
-        ValidarDuplicadoService
+        LoginUsuarioService
       ],
       exports:[
         ObtenerUsuarioService,
         CrearUsuariosService,
         ObtenerTodosUsuariosService,
-        ValidarDuplicadoService
+        LoginUsuarioService
       ]
 })
 export class ApplicationModule {}
